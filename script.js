@@ -37,6 +37,7 @@ const replaceVal = (newVal) => {
 
 const getWeather = async (city) => {
     try{
+        search.value = "";  //making search box empty after submition
         place.innerHTML = `<i class="fas fa-spinner fa-pulse"></i>`;    //only for showing loading symbol 
         const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=d3593db5e8552cc87239b754b39d2d0e`;
         const response = await fetch(url);
