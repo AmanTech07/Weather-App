@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" type="image/x-icon" href="images/cloudy.png">
+    <link rel="stylesheet" href="style.css">
+    <title>Weather App</title>
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <form class="search_form" action="">
+                <input type="search" id="search" placeholder="Enter City Name.." name="search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+
+        <div class="box">
+            <div class="wave one"></div>
+            <div class="wave two"></div>
+            <div class="wave three"></div>
+    
+            <div id="weathercon"></div>
+    
+            <div class="info">
+                <div class="location" id="place"> <i class="fas fa-street-view"></i> Lucknow, IN</div>
+                <p id="date">WED | JAN 4 | 2:05AM</p>
+                <h1 class="temp" id="temperature">14.99 °C</h1>
+                <h3 class="tempmin_max" id="tempRange">Min 14.99°C | Max 14.99°C</h3>
+            </div>
+        </div>
+    </div>
+    <script src="time.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
