@@ -5,7 +5,8 @@ const place = document.querySelector("#place");
 const temperature = document.querySelector("#temperature");
 const tempRange = document.querySelector("#tempRange");
 const tempStatus = document.querySelector("#weathercon");
-// const info_box = document.querySelector("#info_box");
+const curr_location = document.querySelector("#curr_location");
+
 
 function changeStatus(val) { 
     if(val=="Sunny") return `<i class="fas fa-sun" style="color: #eccc68;"></i>`;
@@ -13,6 +14,7 @@ function changeStatus(val) {
     else if(val=="Rainy") return "<i class='fas  fa-cloud-rain' style='color: #a4b0be;'></i>";
     else return "<i class='fas  fa-cloud' style='color:#f1f2f6;'></i>";
 }
+
 
 const replaceVal = (newVal) => {
     if(newVal.cod==="404"){
@@ -35,6 +37,7 @@ const replaceVal = (newVal) => {
     tempStatus.innerHTML = changeStatus(newVal.weather[0].main);
 }
 
+
 const getWeather = async (city) => {
     try{
         search.value = "";  //making search box empty after submition
@@ -49,11 +52,41 @@ const getWeather = async (city) => {
     }
 }
 
+
 form.addEventListener("submit",
     function(event) {
+        curr_location.innerHTML=`Your Location!`;
         getWeather(search.value);
         event.preventDefault();
     }
 )
 
-getWeather("Lucknow");      // Default weather
+
+// getting current location of user
+const getLocation = () => {
+    const success = async (position) => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+
+        const geoApiUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`;
+
+        const status = await fetch(geoApiUrl);
+        const data = await status.json();
+        console.log(data);
+        curr_location.innerHTML = `${data.city}, ${data.countryCode}`;
+        getWeather(data.city);
+    }
+    const error = () => console.log("Unable to get your location!");
+
+    if(navigator.geolocation){
+        console.log(navigator.geolocation.getCurrentPosition(success, error));
+    }
+    else alert("No Location Access!");
+}
+
+
+// clicking on the button Your Location this getLocation function will fire
+curr_location.addEventListener("click", getLocation);
+
+
+getWeather("Delhi");      // Default weather
